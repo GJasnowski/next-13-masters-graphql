@@ -3,7 +3,9 @@ import { faker } from "@faker-js/faker";
 
 const prisma = new PrismaClient();
 
-const productsCount = 5;
+const productsCount = 15;
+const collectionsCount = 3;
+const productsRelatedToCollectionCount = 5;
 
 for (let i = 0; i < productsCount; i++) {
   const name = faker.commerce.productName();
@@ -17,4 +19,19 @@ for (let i = 0; i < productsCount; i++) {
     },
   });
   console.log(`Created product with id: ${createdProduct.id}`);
+}
+
+for (let i = 0; i < collectionsCount; i++) {
+  const name = faker.commerce.productAdjective();
+
+  const createdCollection = await prisma.collection.create({
+    data: {
+      name: name,
+      slug: faker.helpers.slugify(name).toLowerCase(),
+      products: {
+        connect: await prisma.product.findMany({ take: productsRelatedToCollectionCount }),
+      },
+    },
+  });
+  console.log(`Created collection with id: ${createdCollection.id}`);
 }
