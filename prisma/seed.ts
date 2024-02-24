@@ -1,11 +1,13 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, $Enums } from "@prisma/client";
 import { faker } from "@faker-js/faker";
 
 const prisma = new PrismaClient();
 
 const productsCount = 15;
 const collectionsCount = 3;
+const categoriesCount = 3;
 const productsRelatedToCollectionCount = 5;
+const productsRelatedToCategoryCount = 5;
 
 for (let i = 0; i < productsCount; i++) {
   const name = faker.commerce.productName();
@@ -35,4 +37,19 @@ for (let i = 0; i < collectionsCount; i++) {
     },
   });
   console.log(`Created collection with id: ${createdCollection.id}`);
+}
+
+for (let i = 0; i < categoriesCount; i++) {
+  const name = faker.commerce.productMaterial();
+
+  const createdCategory = await prisma.category.create({
+    data: {
+      name: name,
+      slug: faker.helpers.slugify(name).toLowerCase(),
+      products: {
+        connect: await prisma.product.findMany({ take: productsRelatedToCategoryCount }),
+      },
+    },
+  });
+  console.log(`Created category with id: ${createdCategory.id}`);
 }

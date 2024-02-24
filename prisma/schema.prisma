@@ -13,6 +13,8 @@ datasource db {
 model product {
   id           String @id @default(cuid())
   collections  collection[]
+  categories   category[]
+  order_items  order_item[]
   name         String
   slug         String
   description  String
@@ -28,6 +30,44 @@ model collection {
   products    product[]
   name        String
   slug        String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model category {
+  id          String @id @default(cuid())
+  products    product[]
+  name        String
+  slug        String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum order_status {
+  PENDING
+  SUCCESS
+  FAILURE
+}
+
+model order {
+  id          String @id @default(cuid())
+  order_items order_item[]
+  total       Int
+  status      order_status
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model order_item {
+  id          String @id @default(cuid())
+  order       order @relation(fields: [order_id], references: [id])
+  product     product @relation(fields: [product_id], references: [id])
+  order_id    String
+  product_id  String
+  quantity    Int
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
