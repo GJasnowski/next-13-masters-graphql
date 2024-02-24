@@ -17,6 +17,7 @@ model product {
   slug         String
   description  String
   price        Int
+  image        String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
