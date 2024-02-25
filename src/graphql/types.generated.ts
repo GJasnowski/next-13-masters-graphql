@@ -35,6 +35,7 @@ export type Product = {
   __typename?: "Product";
   description: Scalars["String"]["output"];
   id: Scalars["ID"]["output"];
+  image: Scalars["String"]["output"];
   name: Scalars["String"]["output"];
   price: Scalars["Int"]["output"];
   slug: Scalars["String"]["output"];
@@ -42,10 +43,10 @@ export type Product = {
 
 export type Query = {
   __typename?: "Query";
-  product?: Maybe<Product>;
+  products?: Maybe<Product>;
 };
 
-export type QueryproductArgs = {
+export type QueryproductsArgs = {
   id: Scalars["ID"]["input"];
 };
 
@@ -181,6 +182,7 @@ export type ProductResolvers<
 > = {
   description?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  image?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   price?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
   slug?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
@@ -192,11 +194,11 @@ export type QueryResolvers<
   ParentType extends
     ResolversParentTypes["Query"] = ResolversParentTypes["Query"],
 > = {
-  product?: Resolver<
+  products?: Resolver<
     Maybe<ResolversTypes["Product"]>,
     ParentType,
     ContextType,
-    RequireFields<QueryproductArgs, "id">
+    RequireFields<QueryproductsArgs, "id">
   >;
 };
 

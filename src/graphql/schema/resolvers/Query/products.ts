@@ -1,7 +1,7 @@
 import type { QueryResolvers } from "./../../../types.generated";
-import { prisma } from '../../../../db';
+import { prisma } from "../../../../db";
 
-export const product: NonNullable<QueryResolvers["product"]> = async (
+export const products: NonNullable<QueryResolvers["products"]> = async (
   _parent,
   arg,
   _ctx,
