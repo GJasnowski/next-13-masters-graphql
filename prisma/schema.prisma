@@ -14,7 +14,6 @@ model product {
   id                 String @id @default(cuid())
   collections        collection[]
   categories         category[]
-  order_items        order_item[]
   product_variants   product_variant[]
   name               String
   slug               String
@@ -28,6 +27,7 @@ model product {
 
 model product_variant {
   id           String @id @default(cuid())
+  order_items  order_item[]
   name         String
   product      product @relation(fields: [product_id], references: [id])
   product_id   String
@@ -70,12 +70,12 @@ model order {
 }
 
 model order_item {
-  id          String @id @default(cuid())
-  order       order @relation(fields: [order_id], references: [id])
-  product     product @relation(fields: [product_id], references: [id])
-  order_id    String
-  product_id  String
-  quantity    Int
+  id                  String @id @default(cuid())
+  order               order @relation(fields: [order_id], references: [id])
+  product_variant     product_variant @relation(fields: [product_variant_id], references: [id])
+  order_id            String
+  product_variant_id  String
+  quantity            Int
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
