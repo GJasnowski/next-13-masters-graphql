@@ -1,6 +1,7 @@
 extend type Query {
   product(id: ID!): Product
-  products(slug: String): [Product]
+  products(categorySlug: String, take: Int, skip: Int, needle: String): [Product]
+  productsCount(categorySlug: String, needle: String): Int
 }
  
 type Product {

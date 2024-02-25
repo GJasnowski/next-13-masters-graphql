@@ -63,6 +63,7 @@ export type Query = {
   collections?: Maybe<Array<Maybe<Collection>>>;
   product?: Maybe<Product>;
   products?: Maybe<Array<Maybe<Product>>>;
+  productsCount?: Maybe<Scalars["Int"]["output"]>;
 };
 
 export type QuerycategoriesArgs = {
@@ -78,7 +79,15 @@ export type QueryproductArgs = {
 };
 
 export type QueryproductsArgs = {
-  slug?: InputMaybe<Scalars["String"]["input"]>;
+  categorySlug?: InputMaybe<Scalars["String"]["input"]>;
+  needle?: InputMaybe<Scalars["String"]["input"]>;
+  skip?: InputMaybe<Scalars["Int"]["input"]>;
+  take?: InputMaybe<Scalars["Int"]["input"]>;
+};
+
+export type QueryproductsCountArgs = {
+  categorySlug?: InputMaybe<Scalars["String"]["input"]>;
+  needle?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -284,6 +293,12 @@ export type QueryResolvers<
     ParentType,
     ContextType,
     Partial<QueryproductsArgs>
+  >;
+  productsCount?: Resolver<
+    Maybe<ResolversTypes["Int"]>,
+    ParentType,
+    ContextType,
+    Partial<QueryproductsCountArgs>
   >;
 };
 
