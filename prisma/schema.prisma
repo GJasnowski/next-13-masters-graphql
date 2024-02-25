@@ -47,8 +47,8 @@ model category {
 
 enum order_status {
   PENDING
-  SUCCESS
-  FAILURE
+  COMPLETED
+  CANCELLED
 }
 
 model order {
