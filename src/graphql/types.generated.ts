@@ -55,6 +55,13 @@ export type Product = {
   name: Scalars["String"]["output"];
   price: Scalars["Int"]["output"];
   slug: Scalars["String"]["output"];
+  variants?: Maybe<Array<Maybe<ProductVariant>>>;
+};
+
+export type ProductVariant = {
+  __typename?: "ProductVariant";
+  id: Scalars["ID"]["output"];
+  name: Scalars["String"]["output"];
 };
 
 export type Query = {
@@ -203,6 +210,7 @@ export type ResolversTypes = {
   Collection: ResolverTypeWrapper<Collection>;
   Product: ResolverTypeWrapper<Product>;
   Int: ResolverTypeWrapper<Scalars["Int"]["output"]>;
+  ProductVariant: ResolverTypeWrapper<ProductVariant>;
   Query: ResolverTypeWrapper<{}>;
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]["output"]>;
 };
@@ -215,6 +223,7 @@ export type ResolversParentTypes = {
   Collection: Collection;
   Product: Product;
   Int: Scalars["Int"]["output"];
+  ProductVariant: ProductVariant;
   Query: {};
   Boolean: Scalars["Boolean"]["output"];
 };
@@ -262,6 +271,21 @@ export type ProductResolvers<
   name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   price?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
   slug?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  variants?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes["ProductVariant"]>>>,
+    ParentType,
+    ContextType
+  >;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ProductVariantResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes["ProductVariant"] = ResolversParentTypes["ProductVariant"],
+> = {
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -306,5 +330,6 @@ export type Resolvers<ContextType = any> = {
   Category?: CategoryResolvers<ContextType>;
   Collection?: CollectionResolvers<ContextType>;
   Product?: ProductResolvers<ContextType>;
+  ProductVariant?: ProductVariantResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
 };

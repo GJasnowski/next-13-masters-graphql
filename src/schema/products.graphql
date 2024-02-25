@@ -4,6 +4,11 @@ extend type Query {
   productsCount(categorySlug: String, needle: String): Int
 }
  
+type ProductVariant {
+  id: ID!
+  name: String!
+}
+
 type Product {
   id: ID!
   name: String!
@@ -11,4 +16,5 @@ type Product {
   description: String!
   price: Int!
   image: String!
+  variants: [ProductVariant]
 }

@@ -4,6 +4,8 @@ import { faker } from "@faker-js/faker";
 const prisma = new PrismaClient();
 
 const productsCount = 15;
+const productVariantsMinCount = 1;
+const productVariantsMaxCount = 5;
 const collectionsCount = 3;
 const categoriesCount = 3;
 const productsRelatedToCollectionCount = 5;
@@ -22,6 +24,18 @@ for (let i = 0; i < productsCount; i++) {
     },
   });
   console.log(`Created product with id: ${createdProduct.id}`);
+
+  const productVariantsCount = Math.floor(
+    Math.random() * (productVariantsMaxCount - productVariantsMinCount) + productVariantsMinCount
+  );
+  for (let i = 0; i < productVariantsCount; i++) {
+    await prisma.product_variant.create({
+      data: {
+        name: faker.color.human(),
+        product_id: createdProduct.id,
+      }
+    })
+  }
 }
 
 for (let i = 0; i < collectionsCount; i++) {

@@ -8,7 +8,7 @@ export const collections: NonNullable<QueryResolvers["collections"]> = async (
 ) => {
   const collections = await prisma.collection.findMany({
     where: {
-      ...arg.slug ? { slug: arg.slug } : {},
+      ...(arg.slug ? { slug: arg.slug } : {}),
     },
   });
   return collections;

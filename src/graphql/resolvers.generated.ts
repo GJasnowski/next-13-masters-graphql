@@ -3,6 +3,7 @@ import type { Resolvers } from "./types.generated";
 import { Category } from "./schema/resolvers/Category";
 import { Collection } from "./schema/resolvers/Collection";
 import { Product } from "./schema/resolvers/Product";
+import { ProductVariant } from "./schema/resolvers/ProductVariant";
 import { categories as Query_categories } from "./schema/resolvers/Query/categories";
 import { collections as Query_collections } from "./schema/resolvers/Query/collections";
 import { product as Query_product } from "./schema/resolvers/Query/product";
@@ -20,4 +21,5 @@ export const resolvers: Resolvers = {
   Category: Category,
   Collection: Collection,
   Product: Product,
+  ProductVariant: ProductVariant,
 };

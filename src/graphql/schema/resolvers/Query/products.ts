@@ -13,15 +13,27 @@ export const products: NonNullable<QueryResolvers["products"]> = async (
     take: arg.take ?? defaultTake,
     skip: arg.skip ?? defaultSkip,
     where: {
-      ...arg.categorySlug ? { categories: { some: { slug: arg.categorySlug } } } : {},
-      ...arg.needle ? {
-        OR: [
-          { name: { contains: arg.needle, mode: "insensitive" } },
-          { description: { contains: arg.needle, mode: "insensitive" } },
-          { categories: { some: { name: { contains: arg.needle, mode: "insensitive" } } } },
-          { collections: { some: { name: { contains: arg.needle, mode: "insensitive" } } } },
-        ],
-      } : {},
+      ...(arg.categorySlug
+        ? { categories: { some: { slug: arg.categorySlug } } }
+        : {}),
+      ...(arg.needle
+        ? {
+            OR: [
+              { name: { contains: arg.needle, mode: "insensitive" } },
+              { description: { contains: arg.needle, mode: "insensitive" } },
+              {
+                categories: {
+                  some: { name: { contains: arg.needle, mode: "insensitive" } },
+                },
+              },
+              {
+                collections: {
+                  some: { name: { contains: arg.needle, mode: "insensitive" } },
+                },
+              },
+            ],
+          }
+        : {}),
     },
   });
   return product;
