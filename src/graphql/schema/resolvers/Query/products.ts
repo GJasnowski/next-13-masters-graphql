@@ -13,6 +13,7 @@ export const products: NonNullable<QueryResolvers["products"]> = async (
     take: arg.take ?? defaultTake,
     skip: arg.skip ?? defaultSkip,
     where: {
+      ...(arg.notId ? { id: { not: arg.notId } } : {}),
       ...(arg.categorySlug
         ? { categories: { some: { slug: arg.categorySlug } } }
         : {}),

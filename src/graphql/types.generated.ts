@@ -88,6 +88,7 @@ export type QueryproductArgs = {
 export type QueryproductsArgs = {
   categorySlug?: InputMaybe<Scalars["String"]["input"]>;
   needle?: InputMaybe<Scalars["String"]["input"]>;
+  notId?: InputMaybe<Scalars["String"]["input"]>;
   skip?: InputMaybe<Scalars["Int"]["input"]>;
   take?: InputMaybe<Scalars["Int"]["input"]>;
 };
