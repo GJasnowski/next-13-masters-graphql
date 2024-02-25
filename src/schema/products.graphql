@@ -1,5 +1,6 @@
 extend type Query {
-  products(id: ID!): Product
+  product(id: ID!): Product
+  products(slug: String): [Product]
 }
  
 type Product {

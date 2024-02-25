@@ -31,6 +31,22 @@ export type Scalars = {
   Float: { input: number; output: number };
 };
 
+export type Category = {
+  __typename?: "Category";
+  id: Scalars["ID"]["output"];
+  name: Scalars["String"]["output"];
+  products?: Maybe<Array<Maybe<Product>>>;
+  slug: Scalars["String"]["output"];
+};
+
+export type Collection = {
+  __typename?: "Collection";
+  id: Scalars["ID"]["output"];
+  name: Scalars["String"]["output"];
+  products?: Maybe<Array<Maybe<Product>>>;
+  slug: Scalars["String"]["output"];
+};
+
 export type Product = {
   __typename?: "Product";
   description: Scalars["String"]["output"];
@@ -43,11 +59,26 @@ export type Product = {
 
 export type Query = {
   __typename?: "Query";
-  products?: Maybe<Product>;
+  categories?: Maybe<Array<Maybe<Category>>>;
+  collections?: Maybe<Array<Maybe<Collection>>>;
+  product?: Maybe<Product>;
+  products?: Maybe<Array<Maybe<Product>>>;
+};
+
+export type QuerycategoriesArgs = {
+  slug?: InputMaybe<Scalars["String"]["input"]>;
+};
+
+export type QuerycollectionsArgs = {
+  slug?: InputMaybe<Scalars["String"]["input"]>;
+};
+
+export type QueryproductArgs = {
+  id: Scalars["ID"]["input"];
 };
 
 export type QueryproductsArgs = {
-  id: Scalars["ID"]["input"];
+  slug?: InputMaybe<Scalars["String"]["input"]>;
 };
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -157,9 +188,11 @@ export type DirectiveResolverFn<
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  Product: ResolverTypeWrapper<Product>;
-  String: ResolverTypeWrapper<Scalars["String"]["output"]>;
+  Category: ResolverTypeWrapper<Category>;
   ID: ResolverTypeWrapper<Scalars["ID"]["output"]>;
+  String: ResolverTypeWrapper<Scalars["String"]["output"]>;
+  Collection: ResolverTypeWrapper<Collection>;
+  Product: ResolverTypeWrapper<Product>;
   Int: ResolverTypeWrapper<Scalars["Int"]["output"]>;
   Query: ResolverTypeWrapper<{}>;
   Boolean: ResolverTypeWrapper<Scalars["Boolean"]["output"]>;
@@ -167,12 +200,46 @@ export type ResolversTypes = {
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-  Product: Product;
-  String: Scalars["String"]["output"];
+  Category: Category;
   ID: Scalars["ID"]["output"];
+  String: Scalars["String"]["output"];
+  Collection: Collection;
+  Product: Product;
   Int: Scalars["Int"]["output"];
   Query: {};
   Boolean: Scalars["Boolean"]["output"];
+};
+
+export type CategoryResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes["Category"] = ResolversParentTypes["Category"],
+> = {
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  products?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes["Product"]>>>,
+    ParentType,
+    ContextType
+  >;
+  slug?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type CollectionResolvers<
+  ContextType = any,
+  ParentType extends
+    ResolversParentTypes["Collection"] = ResolversParentTypes["Collection"],
+> = {
+  id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  products?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes["Product"]>>>,
+    ParentType,
+    ContextType
+  >;
+  slug?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type ProductResolvers<
@@ -194,15 +261,35 @@ export type QueryResolvers<
   ParentType extends
     ResolversParentTypes["Query"] = ResolversParentTypes["Query"],
 > = {
-  products?: Resolver<
+  categories?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes["Category"]>>>,
+    ParentType,
+    ContextType,
+    Partial<QuerycategoriesArgs>
+  >;
+  collections?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes["Collection"]>>>,
+    ParentType,
+    ContextType,
+    Partial<QuerycollectionsArgs>
+  >;
+  product?: Resolver<
     Maybe<ResolversTypes["Product"]>,
     ParentType,
     ContextType,
-    RequireFields<QueryproductsArgs, "id">
+    RequireFields<QueryproductArgs, "id">
+  >;
+  products?: Resolver<
+    Maybe<Array<Maybe<ResolversTypes["Product"]>>>,
+    ParentType,
+    ContextType,
+    Partial<QueryproductsArgs>
   >;
 };
 
 export type Resolvers<ContextType = any> = {
+  Category?: CategoryResolvers<ContextType>;
+  Collection?: CollectionResolvers<ContextType>;
   Product?: ProductResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
 };

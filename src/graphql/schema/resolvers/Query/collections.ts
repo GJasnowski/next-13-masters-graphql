@@ -1,7 +1,7 @@
 import type { QueryResolvers } from "./../../../types.generated";
 import { prisma } from "../../../../db";
 
-export const products: NonNullable<QueryResolvers["products"]> = async (
+export const collections: NonNullable<QueryResolvers["collections"]> = async (
   _parent,
   arg,
   _ctx,
@@ -11,8 +11,8 @@ export const products: NonNullable<QueryResolvers["products"]> = async (
     whereStatement.slug = arg.slug;
   }
 
-  const product = await prisma.product.findMany({
+  const collections = await prisma.collection.findMany({
     where: whereStatement,
   });
-  return product;
+  return collections;
 };
