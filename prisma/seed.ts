@@ -26,13 +26,18 @@ for (let i = 0; i < productsCount; i++) {
 
 for (let i = 0; i < collectionsCount; i++) {
   const name = faker.commerce.productAdjective();
+  const productsCount = await prisma.product.count();
+  const skippedProductsCount = Math.floor(Math.random() * (productsCount - productsRelatedToCollectionCount));
 
   const createdCollection = await prisma.collection.create({
     data: {
       name: name,
       slug: faker.helpers.slugify(name).toLowerCase(),
       products: {
-        connect: await prisma.product.findMany({ take: productsRelatedToCollectionCount }),
+        connect: await prisma.product.findMany({
+          take: productsRelatedToCollectionCount,
+          skip: skippedProductsCount,
+        }),
       },
     },
   });
@@ -41,13 +46,18 @@ for (let i = 0; i < collectionsCount; i++) {
 
 for (let i = 0; i < categoriesCount; i++) {
   const name = faker.commerce.productMaterial();
+  const productsCount = await prisma.product.count();
+  const skippedProductsCount = Math.floor(Math.random() * (productsCount - productsRelatedToCategoryCount));
 
   const createdCategory = await prisma.category.create({
     data: {
       name: name,
       slug: faker.helpers.slugify(name).toLowerCase(),
       products: {
-        connect: await prisma.product.findMany({ take: productsRelatedToCategoryCount }),
+        connect: await prisma.product.findMany({
+          take: productsRelatedToCategoryCount,
+          skip: skippedProductsCount,
+        }),
       },
     },
   });
