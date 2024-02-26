@@ -39,7 +39,8 @@ for (let i = 0; i < productsCount; i++) {
 }
 
 for (let i = 0; i < collectionsCount; i++) {
-  const name = faker.commerce.productAdjective();
+  const baseName = faker.word.adjective();
+  const name = baseName[0].toUpperCase() + baseName.substring(1);
   const productsCount = await prisma.product.count();
   const skippedProductsCount = Math.floor(Math.random() * (productsCount - productsRelatedToCollectionCount));
 
@@ -59,7 +60,8 @@ for (let i = 0; i < collectionsCount; i++) {
 }
 
 for (let i = 0; i < categoriesCount; i++) {
-  const name = faker.commerce.productMaterial();
+  const baseName = faker.word.adjective();
+  const name = baseName[0].toUpperCase() + baseName.substring(1);
   const productsCount = await prisma.product.count();
   const skippedProductsCount = Math.floor(Math.random() * (productsCount - productsRelatedToCategoryCount));
 

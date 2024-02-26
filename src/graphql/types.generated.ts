@@ -35,7 +35,7 @@ export type Category = {
   __typename?: "Category";
   id: Scalars["ID"]["output"];
   name: Scalars["String"]["output"];
-  products?: Maybe<Array<Maybe<Product>>>;
+  products: Array<Product>;
   slug: Scalars["String"]["output"];
 };
 
@@ -43,7 +43,7 @@ export type Collection = {
   __typename?: "Collection";
   id: Scalars["ID"]["output"];
   name: Scalars["String"]["output"];
-  products?: Maybe<Array<Maybe<Product>>>;
+  products: Array<Product>;
   slug: Scalars["String"]["output"];
 };
 
@@ -55,7 +55,7 @@ export type Product = {
   name: Scalars["String"]["output"];
   price: Scalars["Int"]["output"];
   slug: Scalars["String"]["output"];
-  variants?: Maybe<Array<Maybe<ProductVariant>>>;
+  variants: Array<ProductVariant>;
 };
 
 export type ProductVariant = {
@@ -66,10 +66,10 @@ export type ProductVariant = {
 
 export type Query = {
   __typename?: "Query";
-  categories?: Maybe<Array<Maybe<Category>>>;
-  collections?: Maybe<Array<Maybe<Collection>>>;
+  categories: Array<Category>;
+  collections: Array<Collection>;
   product?: Maybe<Product>;
-  products?: Maybe<Array<Maybe<Product>>>;
+  products: Array<Product>;
   productsCount: Scalars["Int"]["output"];
 };
 
@@ -237,7 +237,7 @@ export type CategoryResolvers<
   id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
   name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   products?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes["Product"]>>>,
+    Array<ResolversTypes["Product"]>,
     ParentType,
     ContextType
   >;
@@ -253,7 +253,7 @@ export type CollectionResolvers<
   id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
   name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   products?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes["Product"]>>>,
+    Array<ResolversTypes["Product"]>,
     ParentType,
     ContextType
   >;
@@ -273,7 +273,7 @@ export type ProductResolvers<
   price?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
   slug?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   variants?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes["ProductVariant"]>>>,
+    Array<ResolversTypes["ProductVariant"]>,
     ParentType,
     ContextType
   >;
@@ -296,13 +296,13 @@ export type QueryResolvers<
     ResolversParentTypes["Query"] = ResolversParentTypes["Query"],
 > = {
   categories?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes["Category"]>>>,
+    Array<ResolversTypes["Category"]>,
     ParentType,
     ContextType,
     Partial<QuerycategoriesArgs>
   >;
   collections?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes["Collection"]>>>,
+    Array<ResolversTypes["Collection"]>,
     ParentType,
     ContextType,
     Partial<QuerycollectionsArgs>
@@ -314,7 +314,7 @@ export type QueryResolvers<
     RequireFields<QueryproductArgs, "id">
   >;
   products?: Resolver<
-    Maybe<Array<Maybe<ResolversTypes["Product"]>>>,
+    Array<ResolversTypes["Product"]>,
     ParentType,
     ContextType,
     Partial<QueryproductsArgs>

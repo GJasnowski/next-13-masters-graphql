@@ -8,6 +8,7 @@
 		"postinstall": "pnpm codegen",
 		"dev": "tsx watch src/server.ts",
     "dbupdate": "pnpm prisma migrate dev; pnpm prisma generate",
+    "dbreset": "pnpm prisma db push --force-reset; pnpm prisma generate; pnpm tsx prisma/seed.ts",
 		"seed": "tsx prisma/seed.ts"
 	},
   "keywords": [],

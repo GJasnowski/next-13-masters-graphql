@@ -1,10 +1,10 @@
 extend type Query {
-  categories(slug: String): [Category]
+  categories(slug: String): [Category!]!
 }
 
 type Category {
   id: ID!
   name: String!
   slug: String!
-  products: [Product]
+  products: [Product!]!
 }
