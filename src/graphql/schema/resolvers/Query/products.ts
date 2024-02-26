@@ -37,5 +37,5 @@ export const products: NonNullable<QueryResolvers["products"]> = async (
         : {}),
     },
   });
-  return product;
+  return product ?? [];
 };

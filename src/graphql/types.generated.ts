@@ -35,7 +35,7 @@ export type Category = {
   __typename?: "Category";
   id: Scalars["ID"]["output"];
   name: Scalars["String"]["output"];
-  products: Array<Product>;
+  products?: Maybe<Array<Product>>;
   slug: Scalars["String"]["output"];
 };
 
@@ -43,7 +43,7 @@ export type Collection = {
   __typename?: "Collection";
   id: Scalars["ID"]["output"];
   name: Scalars["String"]["output"];
-  products: Array<Product>;
+  products?: Maybe<Array<Product>>;
   slug: Scalars["String"]["output"];
 };
 
@@ -55,7 +55,7 @@ export type Product = {
   name: Scalars["String"]["output"];
   price: Scalars["Int"]["output"];
   slug: Scalars["String"]["output"];
-  variants: Array<ProductVariant>;
+  variants?: Maybe<Array<ProductVariant>>;
 };
 
 export type ProductVariant = {
@@ -237,7 +237,7 @@ export type CategoryResolvers<
   id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
   name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   products?: Resolver<
-    Array<ResolversTypes["Product"]>,
+    Maybe<Array<ResolversTypes["Product"]>>,
     ParentType,
     ContextType
   >;
@@ -253,7 +253,7 @@ export type CollectionResolvers<
   id?: Resolver<ResolversTypes["ID"], ParentType, ContextType>;
   name?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   products?: Resolver<
-    Array<ResolversTypes["Product"]>,
+    Maybe<Array<ResolversTypes["Product"]>>,
     ParentType,
     ContextType
   >;
@@ -273,7 +273,7 @@ export type ProductResolvers<
   price?: Resolver<ResolversTypes["Int"], ParentType, ContextType>;
   slug?: Resolver<ResolversTypes["String"], ParentType, ContextType>;
   variants?: Resolver<
-    Array<ResolversTypes["ProductVariant"]>,
+    Maybe<Array<ResolversTypes["ProductVariant"]>>,
     ParentType,
     ContextType
   >;

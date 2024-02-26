@@ -6,5 +6,5 @@ type Collection {
   id: ID!
   name: String!
   slug: String!
-  products: [Product!]!
+  products: [Product!]
 }
