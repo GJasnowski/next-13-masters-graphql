@@ -70,7 +70,7 @@ export type Query = {
   collections?: Maybe<Array<Maybe<Collection>>>;
   product?: Maybe<Product>;
   products?: Maybe<Array<Maybe<Product>>>;
-  productsCount?: Maybe<Scalars["Int"]["output"]>;
+  productsCount: Scalars["Int"]["output"];
 };
 
 export type QuerycategoriesArgs = {
@@ -320,7 +320,7 @@ export type QueryResolvers<
     Partial<QueryproductsArgs>
   >;
   productsCount?: Resolver<
-    Maybe<ResolversTypes["Int"]>,
+    ResolversTypes["Int"],
     ParentType,
     ContextType,
     Partial<QueryproductsCountArgs>
