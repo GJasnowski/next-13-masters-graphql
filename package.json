@@ -4,30 +4,35 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-		"codegen": "graphql-codegen --config .graphqlrc.ts",
-		"postinstall": "pnpm codegen",
-		"dev": "tsx watch src/server.ts",
+    "dev": "next dev",
+    "build": "pnpm prisma migrate dev; next build",
+    "start": "next start",
+    "codegen": "graphql-codegen --config .graphqlrc.ts",
     "dbupdate": "pnpm prisma migrate dev; pnpm prisma generate",
     "dbreset": "pnpm prisma db push --force-reset; pnpm prisma generate; pnpm tsx prisma/seed.ts",
-		"seed": "tsx prisma/seed.ts"
-	},
+    "seed": "tsx prisma/seed.ts"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@eddeee888/gcg-typescript-resolver-files": "^0.7.2",
-    "@faker-js/faker": "^8.3.1",
     "@graphql-codegen/cli": "^5.0.0",
+    "@types/react": "18.2.60",
     "graphql": "^16.8.1",
     "prettier": "^3.2.4",
-    "prisma": "^5.8.1",
-    "tsx": "^4.7.0",
     "typescript": "^5.3.3"
   },
   "dependencies": {
     "@apollo/server": "^4.10.0",
+    "@as-integrations/next": "^3.0.0",
+    "@faker-js/faker": "^8.3.1",
     "@prisma/client": "^5.8.1",
-    "graphql-scalars": "^1.22.4"
+    "graphql-scalars": "^1.22.4",
+    "graphql-tag": "^2.12.6",
+    "next": "^14.1.0",
+    "prisma": "^5.8.1",
+    "tsx": "^4.7.0"
   },
   "type": "module"
 }
