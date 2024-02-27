@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
-    "build": "dbprodsetup; next build",
+    "build": "pnpm dbprodsetup; next build",
     "start": "next start",
     "codegen": "graphql-codegen --config .graphqlrc.ts",
     "dbprodsetup": "pnpm prisma migrate deploy; pnpm prisma generate",
